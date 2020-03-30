@@ -9,8 +9,8 @@
     <br />
     <br />
     <div class="mx-auto" style="width: 80px;">
-     <b-form-input  v-model="value" type="color" @input="setbgColor" size="lg" id="colorone" ></b-form-input>
-     <b-form-input  v-model="value" type="color" @input="setbgColor" size="lg" id="colortwo" ></b-form-input>
+     <b-form-input  v-model="value1" type="color" @input="setbgColor" size="lg" id="colorone" ></b-form-input>
+     <b-form-input  v-model="value2" type="color" @input="setbgColor" size="lg" id="colortwo" ></b-form-input>
     </div>
     <br /><br />
     <div id="showvalue"></div>
@@ -28,33 +28,51 @@
 <script>
 import Header from '@/components/Header'
 export default {
-  props: {
+props: {
+   value1: String,
+   value2: String
   },
-  data () {
-    return {
-      //value: ""
-    }
-  },
-  created () {
-  },
-  methods: {
-    setbgColor(e) {
-      if(e.input == true) {
-        console.log(this.value);
-      }
-    /*Listens & Sets the BG Gradient from inputs in setbgColor function
-    const colorone = document.getElementById('colorone');
-    const colortwo = document.getElementById('colortwo');
-    const gradient = document.getElementById('bodybg');
-    const showdata = document.getElementById('showvalue');
-    gradient.style.background = `linear-gradient(to right, ${colorone.value}, ${colortwo.value})`;
-    showdata.style.display = "none";*/
-}
-},
   components: {
   Header
+  },
+    data () {
+    return {
+      localValue1: "#rrggbb",
+      localValue2: "#rrggbb"
+    }
+  },
+  computed: {
+      changeData() {
+         const { localValue1, localValue2 } = this
+         return {
+           localValue1,
+           localValue2
+         }
+      }
+  },
+  watch: {
+  changeData: {
+    handler: function(val) {
+      console.log('value change: ', val)
+    },
+    deep: true
   }
+},
+  methods: {
+      setbgColor() {}
+   }
+
 }
+
+
+
+
+
+
+
+
+
+
 </script>
 <style>
 * {
@@ -97,7 +115,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 350px;
-background: linear-gradient(lightgrey, gainsboro);
+background: linear-gradient(rgb(85, 146, 216), rgb(70, 77, 175));
 }
 input#colorone,
 input#colortwo {

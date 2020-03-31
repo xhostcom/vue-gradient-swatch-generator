@@ -1,8 +1,18 @@
 <template>
   <div id="app">
-  <Header />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+       <img src="./assets/img/Logo.webp" alt="Logo" width="100px">
+       </a>
+       <span><h4>GradGen</h4></span>
+     <button type="button" id="createBtn" @click="createSwatch" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
+    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
+    </div>
+</nav>
   <div id="bodybg">
-  <div class="container text-center">
+<div class="container text-center">
     <h2>Gradient Generator</h2>
     <br />
     <h3>Pick the Color Range and Save Swatch</h3>
@@ -15,41 +25,82 @@
     <br /><br />
     <div id="showvalue"></div>
   </div>
-  </div>
-<div class="jumbotron">
+</div>
+   <b-jumbotron class="text-center">
+   <template v-slot:header>Grad Gen</template>
+
+    <template v-slot:lead>
+      Linear Gradient Swatch Generator, Select Colors and Save to Swatch.
+    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
   <div class="row">
  </div>
   </div>
+</b-jumbotron>
 </div>
-    </div>
 </template>
 <script>
-import Header from '@/components/Header'
 export default {
 props: ['value'],
-  components: {
-  Header
-  },
     data () {
     return {}
   },
   computed: {},
   methods: {
+    // Pick and Set the BG Gradient to main div
       setbgColor() {
-       // const colorone = document.getElementById('colorone');
-        //const colortwo = document.getElementById('colortwo');
-        const gradient = document.getElementById('bodybg');
+        const bg = document.getElementById('bodybg');
         this.$emit('input', {
         value1: +this.$refs.value1.value,
         value2: +this.$refs.value2.value
        })
-        console.log(this.value1);
-        console.log(this.value2);
-        gradient.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+        bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+  },
+  //  Copy gradient, Create new elements for swatch and add to swatch
+  createSwatch() {
+     // Set the actual css style value/statement for the gradient
+      let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+     // Get just the hex values to display/user copy
+      let hexValues = `${this.value1}, ${this.value2}`;
+      // Swatch elements, a col-md-3 and two divs
+      let newSwatch = document.createElement('div');
+      let gradDiv = document.createElement('div');
+      let textDiv = document.createElement('div');
+      // Create the swatch elements.
+      newSwatch.classList.add("col-md-3");
+      // Add the gradient div
+      newSwatch.appendChild(gradDiv);
+      // Set the id to dradient div
+      gradDiv.setAttribute("id", "bg-gradient");
+      // Add the info text div
+      newSwatch.appendChild(textDiv);
+      // Set the id to info div
+      textDiv.setAttribute("id", "info");
+      // Conditional statement to check if swatch exists before insertion
+      let swatch = document.querySelector('.row');
+      let element = document.getElementById("bg-gradient");
+      //If it isn't "undefined" and it isn't "null", then it exists.
+      if(typeof(element) != 'undefined' && element != null) {
+        //alert('Element exists!');
+        //let i;
+        console.log("Its There")
+        //swatch = document.querySelector('.row').childNodes[i];
+        //for (i = 0; i < swatch[0].length; i++) {
+        //swatch[i].appendChild(newSwatch);
+        //gradDiv.style.backgroundImage = gradient;
+        //textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
+        }
+        else {
+    
+        //addTitle()
+        console.log("Its Not There")
+        swatch.appendChild(newSwatch);
+        gradDiv.style.backgroundImage = gradient;
+        textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
+      }
+    }
   }
-}
 }
 </script>
 <style>
@@ -66,6 +117,14 @@ footer {
     .navbar-brand {
       text-transform: uppercase;
       padding: 10px;
+    }
+    h4 {
+    margin-top: 6px;
+    text-transform: uppercase;
+    color: #345678;
+    }
+    h1.display-3 {
+      font-size:64px;
     }
     #bg-gradient {
     height: 180px;;
@@ -93,7 +152,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 350px;
-background: linear-gradient( to right,#27d7da,#13d066);
+background: linear-gradient( to right,#42AAF3,#42AAF3);
 }
 input#colorone,
 input#colortwo {

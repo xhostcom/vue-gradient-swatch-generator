@@ -1,8 +1,8 @@
 import Vue from "vue";
-import App from "./App.vue";
-import './index.js';
 //Node Modules import
 import BootstrapVue from 'bootstrap-vue';
+import App from "./App.vue";
+import './index.js';
 // Import global styles
 import 'bootstrap-vue/dist/bootstrap-vue.css';//Node Module
 import './assets/css/custom.css';  //Local css

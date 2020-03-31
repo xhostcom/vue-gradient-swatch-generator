@@ -94,7 +94,32 @@ props: ['value'],
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
       }
     },
-    editSwatch() {},
+    editSwatch() {
+     // Get the container element
+     let gradContainer = document.getElementById("bg-gradient");
+
+     // Get all divs with class="col" inside the container
+     let grads = gradContainer.getElementsByClassName("col-md-3");
+
+     // Loop through the grads and add the active class to the current/clicked item
+     for (let i = 0; i < grads.length; i++) {
+     grads[i].addEventListener("click", function() {
+     let current = document.getElementsByClassName("active");
+
+     // If there's no active class
+     if (current.length > 0) {
+      current[0].className = current[0].className.replace(" active", "");
+     }
+
+     // Add the active class to the current/clicked div
+     this.className += " active";
+  });
+}
+
+  });
+}
+
+    },
     deleteWSwatch() {}
   }
 }

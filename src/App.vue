@@ -46,6 +46,7 @@ props: ['value'],
         value2: +this.$refs.value2.value
        })
         console.log(this.value1);
+        console.log(this.value2);
         gradient.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
   }
 }
@@ -92,7 +93,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 350px;
-background: linear-gradient( to right, #df42bd,#21b0c1);
+background: linear-gradient( to right,#27d7da,#13d066);
 }
 input#colorone,
 input#colortwo {

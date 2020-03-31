@@ -9,8 +9,8 @@
     <br />
     <br />
     <div class="mx-auto" style="width: 80px;">
-     <b-form-input  v-model="value1" type="color" @input="setbgColor" size="lg" id="colorone" ></b-form-input>
-     <b-form-input  v-model="value2" type="color" @input="setbgColor" size="lg" id="colortwo" ></b-form-input>
+     <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
+     <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
     </div>
     <br /><br />
     <div id="showvalue"></div>
@@ -28,51 +28,28 @@
 <script>
 import Header from '@/components/Header'
 export default {
-props: {
-   value1: String,
-   value2: String
-  },
+props: ['value'],
   components: {
   Header
   },
     data () {
-    return {
-      localValue1: "#rrggbb",
-      localValue2: "#rrggbb"
-    }
+    return {}
   },
-  computed: {
-      changeData() {
-         const { localValue1, localValue2 } = this
-         return {
-           localValue1,
-           localValue2
-         }
-      }
-  },
-  watch: {
-  changeData: {
-    handler: function(val) {
-      console.log('value change: ', val)
-    },
-    deep: true
-  }
-},
+  computed: {},
   methods: {
-      setbgColor() {}
-   }
-
+      setbgColor() {
+       // const colorone = document.getElementById('colorone');
+        //const colortwo = document.getElementById('colortwo');
+        const gradient = document.getElementById('bodybg');
+        this.$emit('input', {
+        value1: +this.$refs.value1.value,
+        value2: +this.$refs.value2.value
+       })
+        console.log(this.value1);
+        gradient.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+  }
 }
-
-
-
-
-
-
-
-
-
-
+}
 </script>
 <style>
 * {
@@ -80,7 +57,7 @@ props: {
  padding: 0;
  box-sizing:border-box;
 }
- /* Add a gray background color and some padding to the footer */
+/* Add a gray background color and some padding to the footer */
 footer {
       background-color: gainsboro;
       padding:12px;
@@ -115,17 +92,17 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 350px;
-background: linear-gradient(rgb(85, 146, 216), rgb(70, 77, 175));
+background: linear-gradient( to right, #df42bd,#21b0c1);
 }
 input#colorone,
 input#colortwo {
 margin:5px;
 cursor: pointer;
 }
+#showvalue {
+  display:none;
+}
 .swal-text {
   text-transform: capitalize;
 }
-
-
-
 </style>

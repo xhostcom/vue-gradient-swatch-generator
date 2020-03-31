@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+<div id="app">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
@@ -13,7 +13,7 @@
 </nav>
   <div id="bodybg">
 <div class="container text-center">
-    <h2>Gradient Generator</h2>
+    <h2>Linear Gradient Generator</h2>
     <br />
     <h3>Pick the Color Range and Save Swatch</h3>
     <br />
@@ -22,9 +22,7 @@
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
     </div>
-    <br /><br />
-    <div id="showvalue"></div>
-  </div>
+</div>
 </div>
    <b-jumbotron class="text-center">
    <template v-slot:header>Grad Gen</template>
@@ -151,18 +149,12 @@ footer {
     }
 #bodybg {
 padding-top: 40px;
-height: 350px;
+height: 380px;
 background: linear-gradient( to right,#42AAF3,#42AAF3);
 }
 input#colorone,
 input#colortwo {
 margin:5px;
 cursor: pointer;
-}
-#showvalue {
-  display:none;
-}
-.swal-text {
-  text-transform: capitalize;
 }
 </style>

@@ -80,18 +80,15 @@ props: ['value'],
       let element = document.getElementById("bg-gradient");
       //If it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
-        //alert('Element exists!');
-        //let i;
-        console.log("Its There")
-        //swatch = document.querySelector('.row').childNodes[i];
-        //for (i = 0; i < swatch[0].length; i++) {
-        //swatch[i].appendChild(newSwatch);
-        //gradDiv.style.backgroundImage = gradient;
-        //textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
-        }
-        else {
-        //addTitle()
-        console.log("Its Not There")
+        let i;
+        swatch = document.querySelector('.row').childNodes[i];
+        for (i = 0; i < swatch.length[0]; i++) {
+        swatch[i].appendChild(newSwatch);
+        gradDiv.style.backgroundImage = gradient;
+        textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
+        } 
+        } else {
+        // First swatch in first row.
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
@@ -118,12 +115,12 @@ footer {
       padding: 10px;
     }
     h4 {
-    margin-top: 6px;
+    margin-top: 12px;
     text-transform: uppercase;
     color: #345678;
     }
     h1.display-3 {
-      font-size:64px;
+      font-size:56px;
     }
     #bg-gradient {
     height: 180px;;

@@ -6,7 +6,13 @@ Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass
 
 ## Demo
 
+http://penitent-kitten.surge.sh/
+
+(temp demo)
+
 ## Repo
+
+https://github.com/xhostcom/vue-gradient-swatch-generator.git
 
 ## Author
 

@@ -90,14 +90,15 @@ props: ['value'],
         //textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
         }
         else {
-    
         //addTitle()
         console.log("Its Not There")
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
       }
-    }
+    },
+    editSwatch() {},
+    deleteWSwatch() {}
   }
 }
 </script>

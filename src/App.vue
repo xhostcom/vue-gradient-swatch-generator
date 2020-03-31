@@ -3,13 +3,38 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
-       <img src="./assets/img/Logo.webp" alt="Logo" width="100px">
-       </a>
-       <span><h4>GradGen</h4></span>
-     <button type="button" id="createBtn" @click="createSwatch" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+     <img src="./assets/img/Logo.webp" alt="GradGen Logo" width="100px">
+     </a>
+      <div>
+      <b-modal
+      id="modal-prevent-closing"
+      ref="modal"
+      title="Name Your Swatch"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+    <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group
+          :state="nameState"
+          label="Swatch Name"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+         <b-form-input
+            id="name-input"
+            v-model="name"
+            :state="nameState"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </form>
+    </b-modal>
+  </div>
+  <button type="button" id="createBtn" @click="createSwatch" class="navbar ml-auto btn btn-sm btn-success">Save</button>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
-    </div>
+  </div>
 </nav>
   <div id="bodybg">
 <div class="container text-center">
@@ -21,46 +46,83 @@
     <div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
-    </div>
+</div>
 </div>
 </div>
    <b-jumbotron class="text-center">
-   <template v-slot:header>Grad Gen</template>
-
-    <template v-slot:lead>
+   <template v-slot:header>Grad Generator</template>
+   <template v-slot:lead>
       Linear Gradient Swatch Generator, Select Colors and Save to Swatch.
-    </template>
+   </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
   <div class="row">
- </div>
-  </div>
+</div>
+</div>
 </b-jumbotron>
+<Footer />
 </div>
 </template>
 <script>
+import Footer from '@/components/Footer'
 export default {
-props: ['value'],
-    data () {
-    return {}
+  data() {
+      return {
+        name: '',
+        nameState: null,
+        submittedNames: []
+      }
   },
+  components: {
+    Footer
+  },
+  props: ['value'],
   computed: {},
   methods: {
-    // Pick and Set the BG Gradient to main div
-      setbgColor() {
-        const bg = document.getElementById('bodybg');
-        this.$emit('input', {
-        value1: +this.$refs.value1.value,
-        value2: +this.$refs.value2.value
-       })
-        bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.nameState = valid
+        return valid
+      },
+      resetModal() {
+        this.name = ''
+        this.nameState = null
+      },
+      handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        bvModalEvt.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the name to submitted names
+        this.submittedNames.push(this.name)
+        // Hide the modal manually
+        this.$nextTick(() => {
+        this.$bvModal.hide('modal-prevent-closing')
+        })
+      },
+  // Pick and Set the BG Gradient to main div
+  setbgColor() {
+      const bg = document.getElementById('bodybg');
+      this.$emit('input', {
+      value1: +this.$refs.value1.value,
+      value2: +this.$refs.value2.value
+      })
+      bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
   },
-  //  Copy gradient, Create new elements for swatch and add to swatch
+  // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
      // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-     // Get just the hex values to display/user copy
+     // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
+      // Set the swatch name
+      let swatchname = document.getElementById('name-input');
       // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
@@ -81,46 +143,23 @@ props: ['value'],
       //If it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
         let i;
-        swatch = document.querySelector('.row').childNodes[i];
+        swatch = document.querySelector('.row').children;
         for (i = 0; i < swatch.length[0]; i++) {
-        swatch[i].appendChild(newSwatch);
+        swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
-        } 
+        }
         } else {
         // First swatch in first row.
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
-      }
+        this.$bvModal.show('modal-prevent-closing');
+        console.log(swatchname);
+        }
     },
-    editSwatch() {
-     // Get the container element
-     let gradContainer = document.getElementById("bg-gradient");
-
-     // Get all divs with class="col" inside the container
-     let grads = gradContainer.getElementsByClassName("col-md-3");
-
-     // Loop through the grads and add the active class to the current/clicked item
-     for (let i = 0; i < grads.length; i++) {
-     grads[i].addEventListener("click", function() {
-     let current = document.getElementsByClassName("active");
-
-     // If there's no active class
-     if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-     }
-
-     // Add the active class to the current/clicked div
-     this.className += " active";
-  });
-}
-
-  });
-}
-
-    },
-    deleteWSwatch() {}
+    editSwatch() {},
+    deleteSwatch() {},
   }
 }
 </script>
@@ -132,7 +171,10 @@ props: ['value'],
 }
 /* Add a gray background color and some padding to the footer */
 footer {
-      background-color: gainsboro;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      background-color: gainsboro!important;
       padding:12px;
     }
     .navbar-brand {
@@ -140,7 +182,7 @@ footer {
       padding: 10px;
     }
     h4 {
-    margin-top: 12px;
+    margin-top: 15px;
     text-transform: uppercase;
     color: #345678;
     }

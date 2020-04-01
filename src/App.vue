@@ -22,17 +22,16 @@
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
 </div>
-<div class="search-box">
-        <input
+        <b-form-input
+        id="name"
+        size="lg"
         type="text"
-        ref="name"
-        :name="name"
         class="search-bar"
         placeholder="Name Your Swatch"
-        v-model="name"
+        v-model="localValue"
+        autofocus
         @keypress="createSwatch()"
         />
-</div>
 </div>
 </div>
    <b-jumbotron class="text-center">
@@ -52,13 +51,17 @@
 <script>
 import Footer from '@/components/Footer'
 export default {
+  data () {
+   return {
+    name
+   }
+  },
   components: {
     Footer
   },
   props:
   [
-  'value',
-  'name'
+  'value'
   ],
   computed: {},
   methods: {
@@ -69,12 +72,10 @@ export default {
       this.$emit('input', {
       value1: +this.$refs.value1.value,
       value2: +this.$refs.value2.value,
-      name: +this.$refs.name.value
       });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       console.log(this.value1);
       console.log(this.value2);
-      console.log(this.name);
     },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
@@ -113,7 +114,6 @@ export default {
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
-
     },
     editSwatch() {},
     deleteSwatch() {}
@@ -137,6 +137,16 @@ footer {
     .navbar-brand {
       text-transform: uppercase;
       padding: 10px;
+    }
+    #editBtn {
+      margin-right: 25px;
+    }
+    #delBtn {
+      margin-left: 25px;
+    }
+    input#name {
+      margin-top: 30px;
+      border-radius: 10px 10px 0px 0px;
     }
     h4 {
     margin-top: 15px;
@@ -173,32 +183,6 @@ footer {
 padding-top: 40px;
 height: 380px;
 background: linear-gradient( to right,#42AAF3,#42AAF3);
-}
-.search-box {
-  width: 100%;
-  margin-bottom: 30px;
-}
-.search-box .search-bar {
-  display: block;
-  width: 100%;
-  padding: 15px;
-
-  color: #313131;
-  font-size: 20px;
-
-  appearance: none;
-  border:none;
-  outline: none;
-  background: none;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 0px 15px 0px 15px;
-  transition: 0.4s;
-}
-.search-box .search-bar:focus {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 16px 0px 16px 0px;
 }
 input#colorone,
 input#colortwo {

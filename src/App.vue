@@ -149,11 +149,13 @@ footer {
       border-radius: 10px 10px 0px 0px;
     }
     h4 {
+    font-family:'Cryptofont';
     margin-top: 15px;
     text-transform: uppercase;
     color: #345678;
     }
     h1.display-3 {
+      font-family:'Cryptofont';
       font-size:56px;
     }
     #bg-gradient {
@@ -173,6 +175,7 @@ footer {
       font-weight: 700;
     }
     #info h5 {
+      font-family:'Cryptofont';
       text-align:left;
       text-transform: capitalize;
       padding-left: 10px;
@@ -182,7 +185,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 380px;
-background: linear-gradient( to right,#42AAF3,#42AAF3);
+background: linear-gradient( to right,#f22d2d,#5213f2);
 }
 input#colorone,
 input#colortwo {

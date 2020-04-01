@@ -23,7 +23,6 @@
         >
          <b-form-input
             id="name-input"
-            type="string"
             v-model="name"
             :state="nameState"
             required
@@ -32,7 +31,7 @@
       </form>
     </b-modal>
   </div>
-  <button type="button" id="createBtn" @click="createSwatch" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+  <button type="button" id="saveBtn" v-if="isCreated" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
   </div>
@@ -116,15 +115,16 @@ export default {
       })
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
   },
+  isCreated() {
+    console.log("Created Works")
+  },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
      // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
      // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
-      // Set the swatch name
-      let swatchname = document.getElementById('name-input');
-      // Swatch elements, a col-md-3 and two divs
+     // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
       let textDiv = document.createElement('div');
@@ -132,7 +132,7 @@ export default {
       newSwatch.classList.add("col-md-3");
       // Add the gradient div
       newSwatch.appendChild(gradDiv);
-      // Set the id to dradient div
+      // Set the id to gradient div
       gradDiv.setAttribute("id", "bg-gradient");
       // Add the info text div
       newSwatch.appendChild(textDiv);
@@ -155,9 +155,13 @@ export default {
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
-        this.$bvModal.show('modal-prevent-closing');
-        console.log(swatchname);
-        }
+       }
+    },
+    saveSwatch() {
+      // Set the swatch name
+      //let swatchname = document.getElementById('name-input');
+      this.$bvModal.show('modal-prevent-closing');
+      console.log("Save Works");
     },
     editSwatch() {},
     deleteSwatch() {},

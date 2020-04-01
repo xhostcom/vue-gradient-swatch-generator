@@ -1,18 +1,18 @@
 <template>
  <section class="container">
- <v-card height="150">
-    <v-footer
+ <b-card height="150">
+    <b-footer
       absolute
       class="font-weight-medium"
     >
-      <v-col
+      <b-col
         class="text-center"
         cols="12"
       >
         {{ new Date().getFullYear() }} — <strong>Xhostcom</strong>
-      </v-col>
-    </v-footer>
-  </v-card>
+      </b-col>
+    </b-footer>
+  </b-card>
  </section>
 </template>
 

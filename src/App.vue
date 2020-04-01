@@ -23,6 +23,7 @@
         >
          <b-form-input
             id="name-input"
+            type="string"
             v-model="name"
             :state="nameState"
             required

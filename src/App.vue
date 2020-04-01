@@ -31,7 +31,7 @@
       </form>
     </b-modal>
   </div>
-    <button type="button" id="saveBtn" v-if="isCreated" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+    <button type="button" id="saveBtn" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
   </div>
@@ -115,12 +115,6 @@ export default {
       })
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
     },
-  isCreated() {
-    let element = document.getElementById("bg-gradient");
-    if(typeof(element) == 'undefined' && element == null) {
-    console.log("Is Created Works")
-    }
-  },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
      // Set the actual css style value/statement for the gradient
@@ -159,24 +153,22 @@ export default {
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
        }
     },
+     checkSwatch() {
+        let swatch = document.querySelector('.row');
+          if(swatch.children <= 0) {
+             console.log("Check Swatch Still  Works")
+          }
+        console.log("Check Swatch Works")
+    },
       saveSwatch() {
-      // Set the swatch name
-      //let swatchname = document.getElementById('name-input');
-      let element = document.getElementById("swatch");
-      if(typeof(element) != 'undefined' && element != null) {
-      //this.$bvModal.show('modal-prevent-closing');
-      } else {
-        console.log("Nothings there yet")
-      }
-       // First swatch in first row.
-     console.log("Save Works");
-     this.createSwatch();
+         this.checkSwatch()
+      console.log("Save Works");
+      this.createSwatch();
     },
     editSwatch() {},
     deleteSwatch() {}
   }
 }
-
 </script>
 <style>
 * {

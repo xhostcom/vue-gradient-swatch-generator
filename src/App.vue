@@ -31,7 +31,7 @@
       </form>
     </b-modal>
   </div>
-  <button type="button" id="saveBtn" v-if="isCreated" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+    <button type="button" id="saveBtn" v-if="isCreated" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
   </div>
@@ -52,7 +52,7 @@
    <b-jumbotron class="text-center">
    <template v-slot:header>Grad Generator</template>
    <template v-slot:lead>
-      Linear Gradient Swatch Generator, Select Colors and Save to Swatch.
+    Linear Gradient Swatch Generator, Select Two Colors and Save to Swatch.
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
@@ -114,7 +114,7 @@ export default {
       value2: +this.$refs.value2.value
       })
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-  },
+    },
   isCreated() {
     let element = document.getElementById("bg-gradient");
     if(typeof(element) == 'undefined' && element == null) {
@@ -127,6 +127,7 @@ export default {
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
      // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
+    // Set the name of the swatch
      // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
@@ -141,18 +142,16 @@ export default {
       newSwatch.appendChild(textDiv);
       // Set the id to info div
       textDiv.setAttribute("id", "info");
+      // Give newSwatch col-md-3 an id
+      newSwatch.setAttribute("id", "swatch");
       // Conditional statement to check if swatch exists before insertion
       let swatch = document.querySelector('.row');
       let element = document.getElementById("bg-gradient");
       //If it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
-        let i;
-        swatch = document.querySelector('.row').children;
-        for (i = 0; i < swatch.length[0]; i++) {
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
-        }
         } else {
         // First swatch in first row.
         swatch.appendChild(newSwatch);
@@ -160,21 +159,24 @@ export default {
         textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
        }
     },
-    saveSwatch() {
+      saveSwatch() {
       // Set the swatch name
       //let swatchname = document.getElementById('name-input');
-      let element = document.getElementById("bg-gradient");
+      let element = document.getElementById("swatch");
       if(typeof(element) != 'undefined' && element != null) {
-      this.$bvModal.show('modal-prevent-closing');
+      //this.$bvModal.show('modal-prevent-closing');
       } else {
         console.log("Nothings there yet")
       }
-      console.log("Save Works");
+       // First swatch in first row.
+     console.log("Save Works");
+     this.createSwatch();
     },
     editSwatch() {},
-    deleteSwatch() {},
+    deleteSwatch() {}
   }
 }
+
 </script>
 <style>
 * {

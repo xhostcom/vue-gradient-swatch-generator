@@ -1,6 +1,5 @@
 <template>
- <section class="container">
- <b-card height="150">
+<b-card height="150">
     <b-footer
       absolute
       class="font-weight-medium"
@@ -13,7 +12,6 @@
       </b-col>
     </b-footer>
   </b-card>
- </section>
 </template>
 
 <script>
@@ -22,8 +20,8 @@ export default {
 }
 </script>
 
-<style scoped>
-.v-footer {
+<style>
+b-footer {
 background-color: gainsboro!important;
 }
 .text-center {

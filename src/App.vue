@@ -6,34 +6,9 @@
      <img src="./assets/img/Logo.webp" alt="GradGen Logo" width="100px">
      </a>
       <div>
-      <b-modal
-      id="modal-prevent-closing"
-      ref="modal"
-      title="Name Your Swatch"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-    <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group
-          :state="nameState"
-          label="Swatch Name"
-          label-for="name-input"
-          invalid-feedback="Name is required"
-        >
-         <b-form-input
-            id="name-input"
-            v-model="name"
-            :state="nameState"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </form>
-    </b-modal>
-  </div>
-    <button type="button" id="saveBtn" @click="saveSwatch" :key="id" class="navbar ml-auto btn btn-sm btn-success">Save</button>
+    </div>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
-    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar ml-auto btn btn-sm btn-primary" >Del</button>
+    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Del</button>
   </div>
 </nav>
   <div id="bodybg">
@@ -46,6 +21,17 @@
     <div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
+</div>
+<div class="search-box">
+        <input
+        type="text"
+        ref="name"
+        :name="name"
+        class="search-bar"
+        placeholder="Name Your Swatch"
+        v-model="name"
+        @keypress="createSwatch()"
+        />
 </div>
 </div>
 </div>
@@ -66,63 +52,37 @@
 <script>
 import Footer from '@/components/Footer'
 export default {
-  data() {
-      return {
-        name: '',
-        nameState: null,
-        submittedNames: []
-      }
-  },
   components: {
     Footer
   },
-  props: ['value'],
+  props:
+  [
+  'value',
+  'name'
+  ],
   computed: {},
   methods: {
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
-      resetModal() {
-        this.name = ''
-        this.nameState = null
-      },
-      handleOk(bvModalEvt) {
-        // Prevent modal from closing
-        bvModalEvt.preventDefault()
-        // Trigger submit handler
-        this.handleSubmit()
-      },
-      handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedNames.push(this.name)
-        // Hide the modal manually
-        this.$nextTick(() => {
-        this.$bvModal.hide('modal-prevent-closing')
-        })
-      },
-  // Pick and Set the BG Gradient to main div
+   // Pick and Set the BG Gradient to main div
   setbgColor() {
+    // Set bg and gradient values
       const bg = document.getElementById('bodybg');
       this.$emit('input', {
       value1: +this.$refs.value1.value,
-      value2: +this.$refs.value2.value
-      })
+      value2: +this.$refs.value2.value,
+      name: +this.$refs.name.value
+      });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+      console.log(this.value1);
+      console.log(this.value2);
+      console.log(this.name);
     },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
-     // Set the actual css style value/statement for the gradient
+      // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-     // Set just the hex values to display/user copy
+      // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
-    // Set the name of the swatch
-     // Swatch elements, a col-md-3 and two divs
+       // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
       let textDiv = document.createElement('div');
@@ -146,25 +106,14 @@ export default {
         // Subsequent Swatches
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
-        textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
+        textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
         } else {
         // First swatch in first row.
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
-        textDiv.innerHTML = `<h5>${hexValues}</h5><p>${hexValues}</p>`;
+        textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
-    },
-     checkSwatch() {
-        let swatch = document.querySelector('.row');
-          if(swatch.children <= 0) {
-             console.log("Check Swatch Still  Works")
-          }
-        console.log("Check Swatch Works")
-    },
-      saveSwatch() {
-         this.checkSwatch()
-      console.log("Save Works");
-      this.createSwatch();
+
     },
     editSwatch() {},
     deleteSwatch() {}
@@ -224,6 +173,32 @@ footer {
 padding-top: 40px;
 height: 380px;
 background: linear-gradient( to right,#42AAF3,#42AAF3);
+}
+.search-box {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
+
+  color: #313131;
+  font-size: 20px;
+
+  appearance: none;
+  border:none;
+  outline: none;
+  background: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 15px 0px 15px;
+  transition: 0.4s;
+}
+.search-box .search-bar:focus {
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 16px 0px 16px 0px;
 }
 input#colorone,
 input#colortwo {

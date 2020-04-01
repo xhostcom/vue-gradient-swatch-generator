@@ -116,7 +116,10 @@ export default {
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
   },
   isCreated() {
-    console.log("Created Works")
+    let element = document.getElementById("bg-gradient");
+    if(typeof(element) == 'undefined' && element == null) {
+    console.log("Is Created Works")
+    }
   },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
@@ -160,7 +163,12 @@ export default {
     saveSwatch() {
       // Set the swatch name
       //let swatchname = document.getElementById('name-input');
+      let element = document.getElementById("bg-gradient");
+      if(typeof(element) != 'undefined' && element != null) {
       this.$bvModal.show('modal-prevent-closing');
+      } else {
+        console.log("Nothings there yet")
+      }
       console.log("Save Works");
     },
     editSwatch() {},

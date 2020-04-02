@@ -118,7 +118,23 @@ export default {
        }
     },
     editSwatch() {
-      
+       // Get the container element
+    let gradDiv = document.getElementById("swatch");
+    // Loop through the elements and add the active class to the current/clicked div
+    //for (let i = 0; i < gradDiv.length; i++) {
+        gradDiv.addEventListener("click", function () {
+            let current = gradDiv.getElementsByClassName("active");
+            // If there's no active class
+            if (current.length > 0) {
+                current[0].classList.add('active');
+            }
+            // Add the active class to the current/clicked div
+            this.classList.add('active');
+            this.current.addEventListener('click', function () {
+            console.log("Current Div is active");
+            })
+        });
+    //}
     },
     deleteSwatch() {}
   }
@@ -186,6 +202,10 @@ footer {
       font-size: 0.9em;
       font-weight: 700;
     }
+#bg-gradient:hover,
+#bg-gradient.active {
+  border: solid 3px rgba(84, 112, 155, 0.7);
+}
 #bodybg {
 padding-top: 40px;
 height: 380px;

@@ -6,7 +6,7 @@ Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass
 
 ## Demo
 
-http://heavenly-route.surge.sh/
+http://puffy-lead.surge.sh/
 
 (temp demo)
 

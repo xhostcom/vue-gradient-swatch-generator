@@ -28,10 +28,12 @@
         type="text"
         class="search-bar"
         placeholder="Name Your Swatch"
-        v-model="localValue"
-        autofocus
-        @keypress="createSwatch()"
-        />
+        v-model="value3"
+        ref="value3"
+        :value="value3"
+        @keypress="publishSwatch"
+        >
+        </b-form-input>
 </div>
 </div>
    <b-jumbotron class="text-center">
@@ -51,20 +53,12 @@
 <script>
 import Footer from '@/components/Footer'
 export default {
-  data () {
-   return {
-    name
-   }
-  },
   components: {
     Footer
   },
   props:
-  [
-  'value'
-  ],
-  computed: {},
-  methods: {
+ ['value'],
+ methods: {
    // Pick and Set the BG Gradient to main div
   setbgColor() {
     // Set bg and gradient values
@@ -74,8 +68,14 @@ export default {
       value2: +this.$refs.value2.value,
       });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-      console.log(this.value1);
-      console.log(this.value2);
+  },
+    publishSwatch(e) {
+      this.$emit('input', {
+      value3: +this.$refs.value3.value,
+      });
+      if (e.key == "Enter") {
+      this.createSwatch();
+      }
     },
   // Copy gradient, Create new elements for swatch and add to swatch
   createSwatch() {
@@ -83,7 +83,9 @@ export default {
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
-       // Swatch elements, a col-md-3 and two divs
+      // Set name of swatch
+      let name = (`${this.value3}`);
+      // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
       let textDiv = document.createElement('div');
@@ -115,7 +117,9 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
-    editSwatch() {},
+    editSwatch() {
+      
+    },
     deleteSwatch() {}
   }
 }
@@ -139,10 +143,10 @@ footer {
       padding: 10px;
     }
     #editBtn {
-      margin-right: 25px;
+      margin-right: 45px;
     }
     #delBtn {
-      margin-left: 25px;
+      margin-left: 45px;
     }
     input#name {
       margin-top: 30px;

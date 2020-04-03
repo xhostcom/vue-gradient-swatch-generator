@@ -7,6 +7,7 @@ import './index.js';
 import 'bootstrap-vue/dist/bootstrap-vue.css';//Node Module
 import './assets/css/cryptofont.css';
 import './assets/css/custom.css';  //Local css
+import './registerServiceWorker'
 
 
 Vue.config.productionTip = false

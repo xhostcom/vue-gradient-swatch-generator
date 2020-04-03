@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
      <img src="./assets/img/Logo.webp" alt="GradGen Logo" width="100px">
@@ -11,7 +11,7 @@
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Del</button>
   </div>
 </nav>
-  <div id="bodybg">
+<div id="bodybg">
 <div class="container text-center">
     <h2>Linear Gradient Generator</h2>
     <br />
@@ -43,7 +43,7 @@
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
-  <div class="row">
+<div class="row" id="gallery">
 </div>
 </div>
 </b-jumbotron>
@@ -75,6 +75,7 @@ export default {
       });
       if (e.key == "Enter") {
       this.createSwatch();
+      this.editSwatch();
       }
     },
   // Copy gradient, Create new elements for swatch and add to swatch
@@ -117,28 +118,18 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
-    editSwatch() {
-       // Get the container element
-    let gradDiv = document.getElementById("swatch");
-    // Loop through the elements and add the active class to the current/clicked div
-    //for (let i = 0; i < gradDiv.length; i++) {
-        gradDiv.addEventListener("click", function () {
-            let current = gradDiv.getElementsByClassName("active");
-            // If there's no active class
-            if (current.length > 0) {
-                current[0].classList.add('active');
-            }
-            // Add the active class to the current/clicked div
-            this.classList.add('active');
-            this.current.addEventListener('click', function () {
-            console.log("Current Div is active");
-            })
-        });
-    //}
-    },
-    deleteSwatch() {}
-  }
+ editSwatch() {
+     let swatchs = document.getElementById('gallery'),
+     links = swatchs.getElementsById('bg-gradient'),
+     i;
+     for (i = 0; i < links.length; i += 1) {
+     links[i].onclick = console.log("Click Works");
+     }
+ },
+ deleteSwatch() {}
 }
+}
+
 </script>
 <style>
 * {
@@ -166,7 +157,7 @@ footer {
     }
     input#name {
       margin-top: 30px;
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 8px 8px 0px 0px;
     }
     h4 {
     font-family:'Cryptofont';
@@ -202,6 +193,7 @@ footer {
       font-size: 0.9em;
       font-weight: 700;
     }
+#bg-gradient:focus,
 #bg-gradient:hover,
 #bg-gradient.active {
   border: solid 3px rgba(84, 112, 155, 0.7);
@@ -209,7 +201,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 380px;
-background: linear-gradient( to right,#f22d2d,#5213f2);
+background: linear-gradient( to right, #ee2b2b, #960ee0);
 }
 input#colorone,
 input#colortwo {

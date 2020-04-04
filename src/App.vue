@@ -127,20 +127,16 @@ export default {
       let smallSRC = smallID.style.backgroundImage;
       // eslint-disable-next-line no-unused-vars
       let mainSRC =  mainID.style.backgroundImage;
-      console.log('Clicked');
-
-
-
-
-
-
-
-    });
+      smallID.addEventListener('click', function() {
+        console.log('Clicked');
+      });
+      });
+      }
     }
  },
  deleteSwatch() {}
 }
-}
+
 </script>
 <style>
 * {

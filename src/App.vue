@@ -120,7 +120,21 @@ export default {
     let el = document.querySelectorAll('.swatch');
     for(let i=0; i < el.length; i++) {
     el[i].addEventListener('click', function () {
-    
+      el[i].setAttribute('id', 'gradient');
+      let mainID = document.getElementById('bodybg');
+      let smallID = document.getElementById('gradient');
+      // eslint-disable-next-line no-unused-vars
+      let smallSRC = smallID.style.backgroundImage;
+      // eslint-disable-next-line no-unused-vars
+      let mainSRC =  mainID.style.backgroundImage;
+      console.log('Clicked');
+
+
+
+
+
+
+
     });
     }
  },
@@ -198,7 +212,7 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 380px;
-background: linear-gradient( to right, #ee2b2b, #960ee0);
+background-image: linear-gradient( to right, #ee2b2b, #960ee0);
 }
 input#colorone,
 input#colortwo {

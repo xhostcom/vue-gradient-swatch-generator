@@ -27,7 +27,7 @@
         size="lg"
         type="text"
         class="search-bar"
-        placeholder="Name Your Swatch"
+        placeholder="Name Your Swatch and Enter to Save"
         v-model="value3"
         ref="value3"
         :value="value3"
@@ -116,18 +116,17 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
- editSwatch() {
-     let swatchs = document.getElementById('gallery'),
-     links = swatchs.getElementById('swatch'),
-     i;
-     for (i = 0; i < links.length; i += 1) {
-     links[i].addEventListener('click', function () { console.log('click works') });
-     }
+    editSwatch(){
+    let el = document.querySelectorAll('.swatch');
+    for(let i=0; i < el.length; i++) {
+    el[i].addEventListener('click', function () {
+    
+    });
+    }
  },
  deleteSwatch() {}
 }
 }
-
 </script>
 <style>
 * {
@@ -191,9 +190,9 @@ footer {
       font-size: 0.9em;
       font-weight: 700;
     }
-#bg-gradient:focus,
-#bg-gradient:hover,
-#bg-gradient.active {
+.bg-gradient:focus,
+.bg-gradient:hover,
+.bg-gradient.active {
   border: solid 3px rgba(84, 112, 155, 0.7);
 }
 #bodybg {

@@ -124,12 +124,14 @@ export default {
       let mainID = document.getElementById('bodybg');
       let smallID = document.getElementById('gradient');
       // eslint-disable-next-line no-unused-vars
-      let smallSRC = smallID.style.backgroundImage;
+      let mainSRC = mainID.src;
+      let smallSRC = smallID.src;
+      //let smallSRC = smallID.style.backgroundImage;
       // eslint-disable-next-line no-unused-vars
-      let mainSRC =  mainID.style.backgroundImage;
-      smallID.addEventListener('click', function() {
+     // let mainSRC =  mainID.style.backgroundImage;
+        mainSRC = smallSRC;
         console.log('Clicked');
-      });
+
       });
       }
     }

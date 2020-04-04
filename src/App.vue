@@ -43,7 +43,7 @@
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
-<div class="row" id="gallery">
+<div class="row gallery">
 </div>
 </div>
 </b-jumbotron>
@@ -91,20 +91,18 @@ export default {
       let gradDiv = document.createElement('div');
       let textDiv = document.createElement('div');
       // Create the swatch elements.
-      newSwatch.classList.add("col-md-3");
+      newSwatch.classList.add("col-md-3", "swatch");
       // Add the gradient div
       newSwatch.appendChild(gradDiv);
       // Set the id to gradient div
-      gradDiv.setAttribute("id", "bg-gradient");
+      gradDiv.classList.add("bg-gradient");
       // Add the info text div
       newSwatch.appendChild(textDiv);
       // Set the id to info div
       textDiv.setAttribute("id", "info");
-      // Give newSwatch col-md-3 an id
-      newSwatch.setAttribute("id", "swatch");
       // Conditional statement to check if swatch exists before insertion
       let swatch = document.querySelector('.row');
-      let element = document.getElementById("bg-gradient");
+      let element = document.getElementsByTagName("bg-gradient");
       //If it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
         // Subsequent Swatches
@@ -120,10 +118,10 @@ export default {
     },
  editSwatch() {
      let swatchs = document.getElementById('gallery'),
-     links = swatchs.getElementsById('bg-gradient'),
+     links = swatchs.getElementById('swatch'),
      i;
      for (i = 0; i < links.length; i += 1) {
-     links[i].onclick = console.log("Click Works");
+     links[i].addEventListener('click', function () { console.log('click works') });
      }
  },
  deleteSwatch() {}
@@ -169,7 +167,7 @@ footer {
       font-family:'Cryptofont';
       font-size:56px;
     }
-    #bg-gradient {
+    .bg-gradient {
     height: 180px;;
     width:100%;
     }

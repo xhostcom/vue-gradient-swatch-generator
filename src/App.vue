@@ -130,13 +130,20 @@ export default {
       // eslint-disable-next-line no-unused-vars
      // let mainSRC =  mainID.style.backgroundImage;
         mainSRC = smallSRC;
-        console.log('Clicked');
+         alert('Clicked');
 
       });
       }
     }
  },
- deleteSwatch() {}
+ deleteSwatch() {
+   let el = document.querySelectorAll('.swatch');
+    for(let i=0; i < el.length; i++) {
+    el[i].addEventListener('click', function () {
+     alert('Click Delete or Edit');
+    });
+  }
+ }
 }
 
 </script>

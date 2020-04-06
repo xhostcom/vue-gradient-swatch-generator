@@ -140,6 +140,13 @@ export default {
 }
 </script>
 <style>
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+#bodybg { 
+      height: 410px;
+      min-height:410px;
+   }
+}
+
 * {
  margin: 0;
  padding: 0;

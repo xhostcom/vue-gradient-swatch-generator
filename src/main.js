@@ -3,7 +3,6 @@ import Vue from "vue";
 import BootstrapVue from 'bootstrap-vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import App from "./App.vue";
-//import './index.js';
 // Import global styles
 import 'bootstrap-vue/dist/bootstrap-vue.css';//Node Module
 import './assets/css/cryptofont.css';

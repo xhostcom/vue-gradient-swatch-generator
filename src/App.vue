@@ -37,9 +37,10 @@
 </div>
 </div>
    <b-jumbotron class="text-center">
-   <template v-slot:header>Grad Generator</template>
+   <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
-    Linear Gradient Swatch Generator, Select Two Colors and Save to Swatch.
+    Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.
+    Click Individual Swatch to Edit or Delete
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
@@ -52,7 +53,7 @@
 </template>
 <script>
 import Footer from '@/components/Footer'
-import Vue from "vue";
+//import Vue from "vue";
 export default {
   components: {
     Footer
@@ -79,8 +80,8 @@ export default {
       this.handleSwatch();
       }
     },
-  // Copy gradient, Create new elements for swatch and add to swatch
-  createSwatch() {
+   // Copy gradient, Create new elements for swatch and add to swatch
+    createSwatch() {
       // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       // Set just the hex values to display/user copy
@@ -118,34 +119,22 @@ export default {
        }
     },
     handleSwatch(){
-    let el = document.querySelectorAll('.swatch');
-    for(let i=0; i < el.length; i++) {
-    el[i].addEventListener('click', function () {
-      el[i].setAttribute('id', 'gradient');
-      // if(el[i].contains('id','bg-gradient')) {
-      //  el[i].removeAttribute('id', 'bg-gradient');
-      // }
-      //let mainID = document.getElementById('bodybg');
-      //let smallID = document.getElementById('gradient');
-      // eslint-disable-next-line no-unused-vars
-      //let mainSRC = mainID.src;
-      //let smallSRC = smallID.src;
-      //let smallSRC = smallID.style.backgroundImage;
-      // eslint-disable-next-line no-unused-vars
-      // let mainSRC =  mainID.style.backgroundImage;
-      //mainSRC = smallSRC;
-      Vue.swal('Edit Or Delete Swatch!');
-      });
-     }
-   }
- },
+   document.querySelectorAll('.swatch').forEach(_ => {
+  _.addEventListener('click', () =>
+   { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
+    _.setAttribute('id', 'bg-gradient');
+   })
+ })
+},
+ editSwatch() {},
  deleteSwatch() {
    let el = document.querySelectorAll('.swatch');
     for(let i=0; i < el.length; i++) {
     el[i].addEventListener('click', function () {
-     alert('Click Delete or Edit');
+     alert('Delete works');
     });
   }
+ }
  }
 }
 </script>

@@ -6,7 +6,8 @@ Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass
 
 ## Demo
 
-http://numberless-house.surge.sh/
+acceptable-toothpaste.surge.sh
+
 
 (temp demo)
 

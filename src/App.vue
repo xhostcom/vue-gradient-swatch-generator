@@ -53,7 +53,7 @@
 </template>
 <script>
 import Footer from '@/components/Footer'
-//import Vue from "vue";
+import Vue from "vue";
 export default {
   components: {
     Footer
@@ -123,6 +123,7 @@ export default {
   _.addEventListener('click', () =>
    { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
+    Vue.swal('Edit or Delete Swatch?');
    })
  })
 },

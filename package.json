@@ -17,6 +17,7 @@
     "register-service-worker": "^1.6.2",
     "style-loader": "1.0.0",
     "vue": "^2.6.11",
+    "vue-sweetalert2": "^3.0.3",
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {

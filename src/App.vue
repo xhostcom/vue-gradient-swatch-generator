@@ -7,7 +7,7 @@
      </a>
       <div>
     </div>
-    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
+    <button type="button" id="editBtn" @click="handleSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Del</button>
   </div>
 </nav>
@@ -52,6 +52,7 @@
 </template>
 <script>
 import Footer from '@/components/Footer'
+import Vue from "vue";
 export default {
   components: {
     Footer
@@ -75,7 +76,7 @@ export default {
       });
       if (e.key == "Enter") {
       this.createSwatch();
-      this.editSwatch();
+      this.handleSwatch();
       }
     },
   // Copy gradient, Create new elements for swatch and add to swatch
@@ -116,25 +117,27 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
-    editSwatch(){
+    handleSwatch(){
     let el = document.querySelectorAll('.swatch');
     for(let i=0; i < el.length; i++) {
     el[i].addEventListener('click', function () {
       el[i].setAttribute('id', 'gradient');
-      let mainID = document.getElementById('bodybg');
-      let smallID = document.getElementById('gradient');
+      // if(el[i].contains('id','bg-gradient')) {
+      //  el[i].removeAttribute('id', 'bg-gradient');
+      // }
+      //let mainID = document.getElementById('bodybg');
+      //let smallID = document.getElementById('gradient');
       // eslint-disable-next-line no-unused-vars
-      let mainSRC = mainID.src;
-      let smallSRC = smallID.src;
+      //let mainSRC = mainID.src;
+      //let smallSRC = smallID.src;
       //let smallSRC = smallID.style.backgroundImage;
       // eslint-disable-next-line no-unused-vars
-     // let mainSRC =  mainID.style.backgroundImage;
-        mainSRC = smallSRC;
-         alert('Clicked');
-
+      // let mainSRC =  mainID.style.backgroundImage;
+      //mainSRC = smallSRC;
+      Vue.swal('Edit Or Delete Swatch!');
       });
-      }
-    }
+     }
+   }
  },
  deleteSwatch() {
    let el = document.querySelectorAll('.swatch');
@@ -145,7 +148,6 @@ export default {
   }
  }
 }
-
 </script>
 <style>
 * {

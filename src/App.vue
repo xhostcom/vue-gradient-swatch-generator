@@ -123,25 +123,22 @@ export default {
   _.addEventListener('click', () =>
    { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
-    Vue.swal('Edit or Delete Swatch?');
+    Vue.swal('Press Del to Delete, or Edit Swatch?');
    })
  })
 },
  editSwatch() {},
  deleteSwatch() {
-   let el = document.querySelectorAll('.swatch');
-    for(let i=0; i < el.length; i++) {
-    el[i].addEventListener('click', function () {
-     alert('Delete works');
-    });
+ let elem = document.querySelector('.swatch#bg-gradient');
+ elem.parentElement.removeChild(elem);
+ Vue.swal('Swatch Deleted!');
   }
- }
  }
 }
 </script>
 <style>
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-#bodybg { 
+#bodybg {
       height: 410px;
       min-height:410px;
    }

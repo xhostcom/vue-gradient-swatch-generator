@@ -40,7 +40,7 @@
    <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
     Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.
-    Click Individual Swatch to Edit or Delete
+    Click Individual Swatch to Delete or Edit.
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
@@ -127,7 +127,10 @@ export default {
    })
  })
 },
- editSwatch() {},
+ editSwatch() {
+  // eslint-disable-next-line no-unused-vars
+  let elem = document.querySelector('.swatch#bg-gradient');
+ },
  deleteSwatch() {
  let elem = document.querySelector('.swatch#bg-gradient');
  elem.parentElement.removeChild(elem);

@@ -5,10 +5,6 @@
     <a class="navbar-brand" href="#">
      <img src="./assets/img/Logo.webp" alt="GradGen Logo" width="100px">
      </a>
-      <div>
-    </div>
-    <button type="button" id="editBtn" @click="handleSwatch" class="navbar ml-auto btn btn-sm btn-info" >Edit</button>
-    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Del</button>
   </div>
 </nav>
 <div id="bodybg">
@@ -17,12 +13,16 @@
     <br />
     <h3>Pick the Color Range and Save Swatch</h3>
     <br />
-    <br />
-    <div class="mx-auto" style="width: 80px;">
+<div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
 </div>
-        <b-form-input
+<br />
+ <div class="btn-group">
+     <button type="button" id="editBtn" @click="handleSwatch" class="navbar ml-auto btn btn-sm btn-success" >Edit Swatch</button>
+    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Delete Swatch</button>
+    </div>
+ <b-form-input
         id="name"
         size="lg"
         type="text"
@@ -33,14 +33,14 @@
         :value="value3"
         @keypress="publishSwatch"
         >
-        </b-form-input>
+</b-form-input>
 </div>
 </div>
    <b-jumbotron class="text-center">
    <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
     Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.
-    Click Individual Swatch to Delete or Edit.
+    Select Individual Swatch to Delete or Edit.
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
@@ -64,7 +64,7 @@ export default {
    // Pick and Set the BG Gradient to main div
   setbgColor() {
     // Set bg and gradient values
-      const bg = document.getElementById('bodybg');
+      let bg = document.getElementById('bodybg');
       this.$emit('input', {
       value1: +this.$refs.value1.value,
       value2: +this.$refs.value2.value,
@@ -123,13 +123,17 @@ export default {
   _.addEventListener('click', () =>
    { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
-    Vue.swal('Press Del to Delete, or Edit Swatch?');
+    Vue.swal('Press Edit to Edit, or Delete to Delete Swatch');
    })
  })
 },
  editSwatch() {
-  // eslint-disable-next-line no-unused-vars
   let elem = document.querySelector('.swatch#bg-gradient');
+  //let main = document.getElementById('bodybg');
+  if(elem) {
+  console.log(elem.style.value);
+  }
+
  },
  deleteSwatch() {
  let elem = document.querySelector('.swatch#bg-gradient');
@@ -142,8 +146,8 @@ export default {
 <style>
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 #bodybg {
-      height: 410px;
-      min-height:410px;
+      height: 430px;
+      min-height:430px;
    }
 }
 
@@ -165,14 +169,14 @@ footer {
       padding: 10px;
     }
     #editBtn {
-      margin-right: 45px;
+      margin-right: 10px;
     }
     #delBtn {
-      margin-left: 45px;
+      margin-left: 10px;
     }
     input#name {
       margin-top: 30px;
-      border-radius: 8px 8px 0px 0px;
+      border-radius: 8px 8px 8px 8px;
     }
     h4 {
     font-family:'Cryptofont';
@@ -211,12 +215,12 @@ footer {
 .bg-gradient:focus,
 .bg-gradient:hover,
 .bg-gradient.active {
-  border: solid 3px rgba(84, 112, 155, 0.7);
+ border: solid 3px rgba(84, 112, 155, 0.7);
 }
 #bodybg {
 padding-top: 40px;
-height: 380px;
-background-image: linear-gradient( to right, #ee2b2b, #960ee0);
+height: 460px;
+background-image: linear-gradient( to right,#1b78df,#0cd19e);
 }
 input#colorone,
 input#colortwo {

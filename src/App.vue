@@ -13,14 +13,14 @@
     <br />
     <h3>Pick the Color Range and Save Swatch</h3>
     <br />
-<div class="mx-auto" style="width: 80px;">
+ <div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
 </div>
 <br />
  <div class="btn-group">
-     <button type="button" id="editBtn" @click="handleSwatch" class="navbar ml-auto btn btn-sm btn-success" >Edit Swatch</button>
-    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-sm btn-primary" >Delete Swatch</button>
+     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit Swatch</button>
+    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete Swatch</button>
     </div>
  <b-form-input
         id="name"
@@ -119,22 +119,19 @@ export default {
        }
     },
     handleSwatch(){
-   document.querySelectorAll('.swatch').forEach(_ => {
+    document.querySelectorAll('.swatch').forEach(_ => {
   _.addEventListener('click', () =>
-   { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
+    { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
     Vue.swal('Press Edit to Edit, or Delete to Delete Swatch');
-   })
+    });
  })
 },
  editSwatch() {
-  let elem = document.querySelector('.swatch#bg-gradient');
-  //let main = document.getElementById('bodybg');
-  if(elem) {
-  console.log(elem.style.value);
-  }
-
- },
+ document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
+ //let elem = document.getElementById('bg-gradient');
+ //elem.firstElementChild.setAttribute("id","gradient");
+},
  deleteSwatch() {
  let elem = document.querySelector('.swatch#bg-gradient');
  elem.parentElement.removeChild(elem);

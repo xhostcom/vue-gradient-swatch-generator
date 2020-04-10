@@ -129,7 +129,10 @@ export default {
 },
  editSwatch() {
  document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
- //let elem = document.getElementById('bg-gradient');
+ let mainDiv = document.getElementById('bodybg');
+ let smallDiv = document.getElementById('gradient');
+ mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
+//let elem = document.getElementById('bg-gradient');
  //elem.firstElementChild.setAttribute("id","gradient");
 },
  deleteSwatch() {

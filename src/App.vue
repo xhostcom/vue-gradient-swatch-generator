@@ -23,16 +23,13 @@
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete Swatch</button>
     </div>
  <b-form-input
-        id="name"
-        size="lg"
-        type="text"
-        class="search-bar-1"
-        placeholder="Name Your Swatch and Enter to Save"
-        v-model="value3"
-        ref="value3"
-        :value="value3"
-        @keypress="publishSwatch"
-        >
+    id="name"
+    size="lg"
+    type="text"
+    class="search-bar"
+    placeholder="Name Your Swatch and Enter to Save"
+    v-model="value3"
+    @keypress="publishSwatch">
 </b-form-input>
 <b-form-input
         id="name"
@@ -43,7 +40,7 @@
         v-model="value4"
         ref="value4"
         :value="value4"
-        @keypress="publishSwatch2"
+        @keypress="amendSwatch"
         >
 </b-form-input>
 </div>
@@ -70,6 +67,11 @@ export default {
   components: {
     Footer
  },
+  data() {
+    return {
+      value3: null
+    }
+  },
  props:
  ['value'],
  methods: {
@@ -86,7 +88,7 @@ export default {
     publishSwatch(e) {
       // Get the name value
       this.$emit('input', {
-      value3: +this.$refs.value3.value,
+      value3: +this.value3
       });
       if (e.key == "Enter") {
       this.createSwatch();
@@ -95,7 +97,7 @@ export default {
       }
     },
     resetForm() {
-
+    this.value3 = '';
     },
    // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
@@ -156,6 +158,9 @@ document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradie
    this.copySwatch();
  //let elem = document.getElementById('bg-gradient');
  //elem.firstElementChild.setAttribute("id","gradient");
+},
+amendSwatch() {
+
 },
  deleteSwatch() {
  let elem = document.querySelector('.swatch#bg-gradient');

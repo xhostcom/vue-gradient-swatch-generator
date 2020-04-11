@@ -26,12 +26,24 @@
         id="name"
         size="lg"
         type="text"
-        class="search-bar"
+        class="search-bar-1"
         placeholder="Name Your Swatch and Enter to Save"
         v-model="value3"
         ref="value3"
         :value="value3"
         @keypress="publishSwatch"
+        >
+</b-form-input>
+<b-form-input
+        id="name"
+        size="lg"
+        type="text"
+        class="search-bar-2"
+        placeholder="Name Your Swatch and Enter to Save"
+        v-model="value4"
+        ref="value4"
+        :value="value4"
+        @keypress="publishSwatch2"
         >
 </b-form-input>
 </div>
@@ -139,12 +151,10 @@ document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradie
  let mainDiv = document.getElementById('bodybg');
  let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
  mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
-// Vue.swal('Press Edit to Edit, or Delete to Delete Swatch');
 },
  editSwatch() {
    this.copySwatch();
-
-//let elem = document.getElementById('bg-gradient');
+ //let elem = document.getElementById('bg-gradient');
  //elem.firstElementChild.setAttribute("id","gradient");
 },
  deleteSwatch() {
@@ -174,10 +184,6 @@ footer {
       align-items: center;
       background-color: gainsboro!important;
       padding:12px;
-    }
-    .navbar-brand {
-      text-transform: uppercase;
-      padding: 10px;
     }
     #editBtn {
       margin-right: 10px;
@@ -232,6 +238,9 @@ footer {
 padding-top: 40px;
 height: 460px;
 background-image: linear-gradient( to right,#1b78df,#0cd19e);
+}
+.search-bar-2 {
+  display:none!important;
 }
 input#colorone,
 input#colortwo {

@@ -57,11 +57,11 @@ import Vue from "vue";
 export default {
   components: {
     Footer
-  },
-  props:
+ },
+ props:
  ['value'],
  methods: {
-   // Pick and Set the BG Gradient to main div
+  // Pick and Set the BG Gradient to main div
   setbgColor() {
     // Set bg and gradient values
       let bg = document.getElementById('bodybg');
@@ -79,6 +79,9 @@ export default {
       this.createSwatch();
       this.handleSwatch();
       }
+    },
+    resetForm() {
+
     },
    // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {

@@ -63,7 +63,7 @@ export default {
  methods: {
   // Pick and Set the BG Gradient to main div
   setbgColor() {
-    // Set bg and gradient values
+    // Get/Set bg and gradient values
       let bg = document.getElementById('bodybg');
       this.$emit('input', {
       value1: +this.$refs.value1.value,
@@ -72,11 +72,13 @@ export default {
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
     },
     publishSwatch(e) {
+      // Get the name value
       this.$emit('input', {
       value3: +this.$refs.value3.value,
       });
       if (e.key == "Enter") {
       this.createSwatch();
+      this.resetForm();
       this.handleSwatch();
       }
     },
@@ -89,7 +91,7 @@ export default {
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       // Set just the hex values to display/user copy
       let hexValues = `${this.value1}, ${this.value2}`;
-      // Set name of swatch
+      // Set the name of swatch
       let name = (`${this.value3}`);
       // Swatch elements, a col-md-3 and two divs
       let newSwatch = document.createElement('div');

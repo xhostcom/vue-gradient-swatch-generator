@@ -70,7 +70,7 @@ export default {
       value2: +this.$refs.value2.value,
       });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-  },
+    },
     publishSwatch(e) {
       this.$emit('input', {
       value3: +this.$refs.value3.value,
@@ -118,20 +118,27 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
+    // Hamdle individual swatch's on click
     handleSwatch(){
     document.querySelectorAll('.swatch').forEach(_ => {
   _.addEventListener('click', () =>
     { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
-    Vue.swal('Press Edit to Edit, or Delete to Delete Swatch');
+    Vue.swal('Press Edit or Delete Swatch');
     });
  })
 },
- editSwatch() {
- document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
+// Copy individual swatch to main div for editing
+copySwatch() {
+document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
  let mainDiv = document.getElementById('bodybg');
- let smallDiv = document.getElementById('gradient');
+ let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
  mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
+// Vue.swal('Press Edit to Edit, or Delete to Delete Swatch');
+},
+ editSwatch() {
+   this.copySwatch();
+
 //let elem = document.getElementById('bg-gradient');
  //elem.firstElementChild.setAttribute("id","gradient");
 },
@@ -150,7 +157,6 @@ export default {
       min-height:430px;
    }
 }
-
 * {
  margin: 0;
  padding: 0;

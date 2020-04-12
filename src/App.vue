@@ -21,7 +21,7 @@
     <div class="btn-group">
     <button type="button" id="pubBtn" @click="publishSwatch" class="navbar ml-auto btn btn-lg btn-dark" >Publish</button>
     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit</button>
-    <button type="button" id="saveBtn" @click="saveSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save</button>
+    <button type="button" id="saveBtn" class="navbar ml-auto btn btn-lg btn-warning" >Save</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
 <b-form-input
@@ -87,17 +87,14 @@ export default {
       value1: +this.value1,
       value2: +this.value2,
       });
-      bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+      bg.style.backgroundImage = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
    },
     publishSwatch() {
       let value1 = this.value1;
       let value2 = this.value2;
       let name = this.value3;
-      if(value1 == undefined && value2 == undefined && name == null) {
-        Vue.swal('Please enter a gradient');
-      }
-      if(name == '') {
-        Vue.swal('Please enter a name');
+      if(value1 == undefined || value2 == undefined || name == null) {
+        Vue.swal('Please Enter Name and Color Values');
       }
       this.createSwatch();
       this.resetForm();
@@ -165,10 +162,15 @@ document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradie
 mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
 let pubBtn = document.getElementById('pubBtn');
 pubBtn.style.display = "none";
-Vue.swal('Reset Values, Enter and Save Edit');
-},
-saveSwatch() {
-
+Vue.swal('Reset Values and Save The Edit');
+document.getElementById('saveBtn').addEventListener('click', function() {
+// Get/Set bg and gradient values
+let bg = document.getElementById('bodybg');
+//bg.style.backgroundImage = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
+smallDiv = document.querySelector('#bg-gradient > #gradient');
+smallDiv.style.backgroundImage = bg.style.backgroundImage;
+Vue.swal('Gradient Swapped!');
+});
 },
  deleteSwatch() {
  let elem = document.querySelector('.swatch#bg-gradient');

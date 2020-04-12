@@ -94,13 +94,12 @@ export default {
       let value2 = this.value2;
       let name = this.value3;
       if(value1 == undefined || value2 == undefined || name == null) {
-        Vue.swal('Please Enter Name and Color Values');
-      }
+      Vue.swal('Please Enter Name and Color Values');
+      } else {
       this.createSwatch();
       this.resetForm();
       this.handleSwatch();
-      console.log('Publish Works');
-      console.log(name);
+      }
    },
    // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
@@ -129,7 +128,7 @@ export default {
       let element = document.getElementsByTagName("bg-gradient");
       //If it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
-        // Subsequent Swatches
+        // So Subsequent Swatches
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
@@ -163,13 +162,17 @@ mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
 let pubBtn = document.getElementById('pubBtn');
 pubBtn.style.display = "none";
 Vue.swal('Reset Values and Save The Edit');
+this.getName(name);
 document.getElementById('saveBtn').addEventListener('click', function() {
 // Get/Set bg and gradient values
 let bg = document.getElementById('bodybg');
-//bg.style.backgroundImage = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
 smallDiv = document.querySelector('#bg-gradient > #gradient');
+let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
-Vue.swal('Gradient Swapped!');
+textDiv.innerHTML = "";
+console.log(name);
+//textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
+Vue.swal('Swatch Edited!');
 });
 },
  deleteSwatch() {

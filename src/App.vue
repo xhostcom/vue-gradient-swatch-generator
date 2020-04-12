@@ -18,16 +18,17 @@
      <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
 </div>
 <br />
- <div class="btn-group">
-    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit Swatch</button>
-    <button type="button" id="saveBtn" @click="republishSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save Edit</button>
+    <div class="btn-group">
+    <button type="button" id="pubBtn" @click="publishSwatch" class="navbar ml-auto btn btn-lg btn-dark" >Publish</button>
+    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit</button>
+    <button type="button" id="saveBtn" @click="saveSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
 <template>
 <b-form-input
-    v-if="input"
+    v-if="getName"
     placeholder="Name Your Swatch, Enter and Save Edit"
-    @keypress="republishSwatch"
+    @keypress="getName"
     v-model="value3"
     ref="value3"
     id="name"
@@ -36,7 +37,7 @@
     class="search-bar"
 />
 <b-form-input
-    v-else
+    v-else-if="input"
     placeholder="Name Your Swatch and Enter to Save"
     @keypress="publishSwatch"
     v-model="value3"
@@ -47,9 +48,9 @@
     class="search-bar"
 />
 </template>
-</div>
-</div>
-   <b-jumbotron class="text-center">
+ </div>
+ </div>
+ <b-jumbotron class="text-center">
    <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
     Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.
@@ -82,14 +83,16 @@ export default {
     resetForm() {
     this.value3 = '';
     },
-    getName() {
+    getName(e) {
       // Get the name value
+      if (e.key === "Enter")
       this.$emit('input', {
       value3: +this.value3
       });
-    },
+      return this.value3;
+   },
   // Pick and Set the BG Gradient to main div
-  setbgColor() {
+    setbgColor() {
     // Get/Set bg and gradient values
       let bg = document.getElementById('bodybg');
       this.$emit('input', {
@@ -97,14 +100,18 @@ export default {
       value2: +this.$refs.value2.value,
       });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-    },
-    publishSwatch(e) {
-      if (e.key == "Enter") {
+   },
+    publishSwatch() {
+      let name = this.value3;
+      if(name == '') {
+        Vue.swal('Please enter a name')
+      }
       this.createSwatch();
       this.resetForm();
       this.handleSwatch();
-      }
-    },
+      console.log('Publish Works');
+      console.log(name);
+   },
    // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
       // Set the actual css style value/statement for the gradient
@@ -153,20 +160,17 @@ export default {
     });
  })
 },
-// Copy individual swatch to main div for editing
-copySwatch() {
+// Copy individual swatch to main div for re-editing
+editSwatch() {
+let mainDiv = document.getElementById('bodybg');
+let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
+let saveBtn = document.getElementById('saveBtn');
 document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
- let mainDiv = document.getElementById('bodybg');
- let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
- mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
+mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
+saveBtn.style.display = 'block';
+Vue.swal('Reset Values, Enter and Save Edit');
 },
- editSwatch() {
-   this.copySwatch();
-   let saveBtn = document.getElementById('saveBtn');
-   saveBtn.style.display = 'block';
-   Vue.swal('Reset Values, Enter and Save Edit');
-},
-republishSwatch() {
+saveSwatch() {
 
 },
  deleteSwatch() {

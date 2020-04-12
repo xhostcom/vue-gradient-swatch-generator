@@ -19,8 +19,9 @@
 </div>
 <br />
  <div class="btn-group">
-     <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit Swatch</button>
-    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete Swatch</button>
+    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit Swatch</button>
+    <button type="button" id="saveBtn" @click="republishSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save Edit</button>
+    <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
  <b-form-input
     id="name"
@@ -71,10 +72,19 @@ export default {
     return {
       value3: null
     }
-  },
+ },
  props:
  ['value'],
  methods: {
+    resetForm() {
+    this.value3 = '';
+    },
+    getName() {
+      // Get the name value
+      this.$emit('input', {
+      value3: +this.value3
+      });
+    },
   // Pick and Set the BG Gradient to main div
   setbgColor() {
     // Get/Set bg and gradient values
@@ -86,18 +96,11 @@ export default {
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
     },
     publishSwatch(e) {
-      // Get the name value
-      this.$emit('input', {
-      value3: +this.value3
-      });
       if (e.key == "Enter") {
       this.createSwatch();
       this.resetForm();
       this.handleSwatch();
       }
-    },
-    resetForm() {
-    this.value3 = '';
     },
    // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
@@ -137,7 +140,7 @@ export default {
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
        }
     },
-    // Hamdle individual swatch's on click
+    // Handle individual swatch's on click
     handleSwatch(){
     document.querySelectorAll('.swatch').forEach(_ => {
   _.addEventListener('click', () =>
@@ -156,10 +159,11 @@ document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradie
 },
  editSwatch() {
    this.copySwatch();
- //let elem = document.getElementById('bg-gradient');
- //elem.firstElementChild.setAttribute("id","gradient");
+   let saveBtn = document.getElementById('saveBtn');
+   saveBtn.style.display = 'block';
+   Vue.swal('Reset Values, Enter and Save Edit');
 },
-amendSwatch() {
+republishSwatch() {
 
 },
  deleteSwatch() {
@@ -189,6 +193,9 @@ footer {
       align-items: center;
       background-color: gainsboro!important;
       padding:12px;
+    }
+    #saveBtn {
+      display:none;
     }
     #editBtn {
       margin-right: 10px;

@@ -24,10 +24,9 @@
     <button type="button" id="saveBtn" @click="saveSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
-<template>
 <b-form-input
     v-if="getName"
-    placeholder="Name Your Swatch, Enter and Save Edit"
+    placeholder="Name Swatch, Enter, Publish or Save Edit"
     @keypress="getName"
     v-model="value3"
     ref="value3"
@@ -36,19 +35,7 @@
     type="text"
     class="search-bar"
 />
-<b-form-input
-    v-else-if="input"
-    placeholder="Name Your Swatch and Enter to Save"
-    @keypress="publishSwatch"
-    v-model="value3"
-    size="lg"
-    ref="value3"
-    id="name"
-    type="text"
-    class="search-bar"
-/>
-</template>
- </div>
+</div>
  </div>
  <b-jumbotron class="text-center">
    <template v-slot:header>Gradient Swatch Generator</template>
@@ -102,9 +89,14 @@ export default {
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
    },
     publishSwatch() {
+      let value1 = this.value1;
+      let value2 = this.value2;
       let name = this.value3;
+      if(value1 == undefined && value2 == undefined && name == null) {
+        Vue.swal('Please enter a gradient');
+      }
       if(name == '') {
-        Vue.swal('Please enter a name')
+        Vue.swal('Please enter a name');
       }
       this.createSwatch();
       this.resetForm();
@@ -156,7 +148,11 @@ export default {
   _.addEventListener('click', () =>
     { document.querySelectorAll('.swatch#bg-gradient').forEach(swatch => swatch.removeAttribute('id'));
     _.setAttribute('id', 'bg-gradient');
-    Vue.swal('Press Edit or Delete Swatch');
+    let saveBtn = document.getElementById('saveBtn');
+    let editBtn = document.getElementById('editBtn');
+    saveBtn.style.display = 'block';
+    editBtn.style.display = 'block';
+    Vue.swal('Press Edit, Delete or Make Another Swatch');
     });
  })
 },
@@ -164,10 +160,10 @@ export default {
 editSwatch() {
 let mainDiv = document.getElementById('bodybg');
 let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
-let saveBtn = document.getElementById('saveBtn');
 document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
 mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
-saveBtn.style.display = 'block';
+let pubBtn = document.getElementById('pubBtn');
+pubBtn.style.display = "none";
 Vue.swal('Reset Values, Enter and Save Edit');
 },
 saveSwatch() {
@@ -201,14 +197,9 @@ footer {
       background-color: gainsboro!important;
       padding:12px;
     }
+    #editBtn,
     #saveBtn {
       display:none;
-    }
-    #editBtn {
-      margin-right: 10px;
-    }
-    #delBtn {
-      margin-left: 10px;
     }
     input#name {
       margin-top: 30px;

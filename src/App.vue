@@ -26,7 +26,7 @@
     </div>
 <b-form-input
     v-if="getName"
-    placeholder="Name Swatch, Enter, Publish or Save Edit"
+    placeholder="Name Swatch &amp; Publish or Save Edited Swatch"
     @keypress="getName"
     v-model="value3"
     ref="value3"
@@ -70,9 +70,8 @@ export default {
     resetForm() {
     this.value3 = '';
     },
-    getName(e) {
+    getName() {
       // Get the name value
-      if (e.key === "Enter")
       this.$emit('input', {
       value3: +this.value3
       });

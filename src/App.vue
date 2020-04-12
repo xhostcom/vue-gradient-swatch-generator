@@ -14,8 +14,8 @@
     <h3>Pick the Color Range and Save Swatch</h3>
     <br />
  <div class="mx-auto" style="width: 80px;">
-     <b-form-input type="color" size="lg" v-model="value1" ref="value1" :value="value1" @input="setbgColor()" id="colorone" ></b-form-input>
-     <b-form-input type="color" size="lg" v-model="value2" ref="value2" :value="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
+     <b-form-input type="color" size="lg" v-model="value1" ref="value1" @input="setbgColor()" id="colorone" ></b-form-input>
+     <b-form-input type="color" size="lg" v-model="value2" ref="value2" @input="setbgColor()" id="colortwo" ></b-form-input>
 </div>
 <br />
     <div class="btn-group">
@@ -61,6 +61,8 @@ export default {
  },
   data() {
     return {
+      value1: null,
+      value2: null,
       value3: null
     }
  },
@@ -82,8 +84,8 @@ export default {
     // Get/Set bg and gradient values
       let bg = document.getElementById('bodybg');
       this.$emit('input', {
-      value1: +this.$refs.value1.value,
-      value2: +this.$refs.value2.value,
+      value1: +this.value1,
+      value2: +this.value2,
       });
       bg.style.background = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
    },

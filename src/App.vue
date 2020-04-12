@@ -23,27 +23,30 @@
     <button type="button" id="saveBtn" @click="republishSwatch" class="navbar ml-auto btn btn-lg btn-warning" >Save Edit</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
- <b-form-input
+<template>
+<b-form-input
+    v-if="input"
+    placeholder="Name Your Swatch, Enter and Save Edit"
+    @keypress="republishSwatch"
+    v-model="value3"
+    ref="value3"
     id="name"
     size="lg"
     type="text"
     class="search-bar"
-    placeholder="Name Your Swatch and Enter to Save"
-    v-model="value3"
-    @keypress="publishSwatch">
-</b-form-input>
+/>
 <b-form-input
-        id="name"
-        size="lg"
-        type="text"
-        class="search-bar-2"
-        placeholder="Name Your Swatch and Enter to Save"
-        v-model="value4"
-        ref="value4"
-        :value="value4"
-        @keypress="amendSwatch"
-        >
-</b-form-input>
+    v-else
+    placeholder="Name Your Swatch and Enter to Save"
+    @keypress="publishSwatch"
+    v-model="value3"
+    size="lg"
+    ref="value3"
+    id="name"
+    type="text"
+    class="search-bar"
+/>
+</template>
 </div>
 </div>
    <b-jumbotron class="text-center">

@@ -40,7 +40,7 @@
  <b-jumbotron class="text-center">
    <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
-    Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.
+    Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.<br />
     Select Individual Swatch to Delete or Edit.
    </template>
 <div class="container-fluid bg-3 text-center">

@@ -11,7 +11,7 @@
 <div class="container text-center">
     <h2>Linear Gradient Generator</h2>
     <br />
-    <h3>Pick the Color Range and Save Swatch</h3>
+    <h3>Pick the Color Range and Publish Swatch</h3>
     <br />
  <div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" @input="setbgColor()" id="colorone" ></b-form-input>
@@ -166,17 +166,16 @@ let pubBtn = document.getElementById('pubBtn');
 pubBtn.style.display = "none";
 Vue.swal('Reset Values and Save The Edit');
 document.getElementById('saveBtn').addEventListener('click', () => {
-// Get/Set bg and gradient values
+// Get/Set bg, name and gradient values
 let bg = document.getElementById('bodybg');
 smallDiv = document.querySelector('#bg-gradient > #gradient');
 let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
-textDiv.innerHTML = "";
 let hexValues = `${this.value1}, ${this.value2}`;
 let name = (`${this.value3}`);
 console.log(name);
 console.log(hexValues);
-//textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
+textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
 Vue.swal('Swatch Edited!');
 });
 },

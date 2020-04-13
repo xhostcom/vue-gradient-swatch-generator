@@ -72,23 +72,26 @@ export default {
     resetForm() {
     this.value3 = '';
     },
+    // Get the name value
     getName() {
-      // Get the name value
       this.$emit('input', {
       value3: +this.value3
       });
       return this.value3;
    },
-  // Pick and Set the BG Gradient to main div
-    setbgColor() {
-    // Get/Set bg and gradient values
-      let bg = document.getElementById('bodybg');
+    // Get bg gradient values
+    getbgColor() {
       this.$emit('input', {
       value1: +this.value1,
       value2: +this.value2,
       });
+      return this.value1, this.value2;
+    },
+    // Set the BG Gradient to main div
+    setbgColor() {
+      let bg = document.getElementById('bodybg');
       bg.style.backgroundImage = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
-   },
+    },
     publishSwatch() {
       let value1 = this.value1;
       let value2 = this.value2;
@@ -162,15 +165,17 @@ mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
 let pubBtn = document.getElementById('pubBtn');
 pubBtn.style.display = "none";
 Vue.swal('Reset Values and Save The Edit');
-this.getName(name);
-document.getElementById('saveBtn').addEventListener('click', function() {
+document.getElementById('saveBtn').addEventListener('click', () => {
 // Get/Set bg and gradient values
 let bg = document.getElementById('bodybg');
 smallDiv = document.querySelector('#bg-gradient > #gradient');
 let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
 textDiv.innerHTML = "";
+let hexValues = `${this.value1}, ${this.value2}`;
+let name = (`${this.value3}`);
 console.log(name);
+console.log(hexValues);
 //textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
 Vue.swal('Swatch Edited!');
 });
@@ -186,8 +191,8 @@ Vue.swal('Swatch Edited!');
 <style>
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 #bodybg {
-      height: 430px;
-      min-height:430px;
+      height: 450px;
+      min-height:450px;
    }
 }
 * {

@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
      <img src="./assets/img/Logo.webp" alt="GradGen Logo" width="100px">
@@ -104,6 +104,8 @@ export default {
    },
   // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
+      //let editBtn = document.getElementById('editBtn');
+      //let saveBtn = document.getElementById('saveBtn');
       // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       // Set just the hex values to display/user copy
@@ -114,6 +116,9 @@ export default {
       let newSwatch = document.createElement('div');
       let gradDiv = document.createElement('div');
       let textDiv = document.createElement('div');
+      // Get the items for insertion
+      let swatch = document.querySelector('.row');
+      let element = document.getElementsByTagName("bg-gradient");
       // Create the swatch elements.
       newSwatch.classList.add("col-md-3", "swatch");
       // Add the gradient div
@@ -124,10 +129,7 @@ export default {
       newSwatch.appendChild(textDiv);
       // Set the id to info div
       textDiv.setAttribute("id", "info");
-      // Conditional statement to check if swatch exists before insertion
-      let swatch = document.querySelector('.row');
-      let element = document.getElementsByTagName("bg-gradient");
-      //If it isn't "undefined" and it isn't "null", then it exists.
+      // Conditional statement to check if swatch exists before insertion, if it isn't "undefined" and it isn't "null", then it exists.
       if(typeof(element) != 'undefined' && element != null) {
         // So Subsequent Swatches
         swatch.appendChild(newSwatch);
@@ -155,36 +157,33 @@ export default {
  })
 },
 // Copy the handled individual swatch to main div for re-editing
+// Copy individual swatch to main div for re-editing
 editSwatch() {
-let saveBtn = document.getElementById('saveBtn');
-let editBtn = document.getElementById('editBtn');
 let mainDiv = document.getElementById('bodybg');
 let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
 document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
 mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
+let editBtn = document.getElementById('editBtn');
+let saveBtn = document.getElementById('saveBtn');
 let pubBtn = document.getElementById('pubBtn');
-pubBtn.style.display = 'none';
-Vue.swal('Reset Values and Save Edited Swatch');
+let delBtn = document.getElementById('delBtn');
+pubBtn.style.display = "none";
+delBtn.style.display = "none";
+Vue.swal('Reset Values and Save The Edit');
 document.getElementById('saveBtn').addEventListener('click', () => {
 // Get/Set bg, name and gradient values
 let bg = document.getElementById('bodybg');
 smallDiv = document.querySelector('#bg-gradient > #gradient');
 let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
-let value1 = this.value1;
-let value2 = this.value2;
-let name = this.value3;
-if(value1 == undefined || value2 == undefined || name == null) {
-Vue.swal('Please Enter Name & Color Values');
-} else {
 let hexValues = `${this.value1}, ${this.value2}`;
+let name = (`${this.value3}`);
 textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
-this.resetForm();
-saveBtn.style.display = 'none';
-editBtn.style.display = 'none';
-pubBtn.style.display = 'block';
-Vue.swal('Swatch Edited, Edit or Make Another One!');
-}
+pubBtn.style.display = "block";
+delBtn.style.display = "block";
+editBtn.style.display = "none";
+saveBtn.style.display = "none";
+Vue.swal('Swatch Edited!');
 });
 },
  deleteSwatch() {

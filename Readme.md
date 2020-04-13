@@ -1,4 +1,4 @@
-Vue Gradient Swatch Generator
+Vue PWA Gradient Swatch Generator
 
 ## Introduction
 
@@ -6,8 +6,7 @@ Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass
 
 ## Demo
 
-http://narrow-dolls.surge.sh/
-
+http://obeisant-twig.surge.sh/
 
 (temp demo)
 
@@ -29,19 +28,21 @@ NPM/Node
  Yarn
 Vue CLI
 
+## FAQ
+
+Q. Is this normal?
+
+A. Yes. This is perfectly normal.
+
 ## Installation
 
 Clone and run yarn
 
 ## Configuration
 
-yarn serve
+yarn serve  (dev localhost:8080)
 
-## FAQ
-
-Q. Is this normal?
-
-A. Yes. This is perfectly normal.
+yarn build (dist)
 
 ## License
 

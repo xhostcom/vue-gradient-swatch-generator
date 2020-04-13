@@ -19,8 +19,8 @@
 </div>
 <br />
     <div class="btn-group">
-    <button type="button" id="pubBtn" @click="publishSwatch" class="navbar ml-auto btn btn-lg btn-dark" >Publish</button>
-    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-success" >Edit</button>
+    <button type="button" id="pubBtn" @click="publishSwatch" class="navbar ml-auto btn btn-lg btn-success" >Publish</button>
+    <button type="button" id="editBtn" @click="editSwatch" class="navbar ml-auto btn btn-lg btn-info" >Edit</button>
     <button type="button" id="saveBtn" class="navbar ml-auto btn btn-lg btn-warning" >Save</button>
     <button type="button" id="delBtn" @click="deleteSwatch" class="navbar mr-auto btn btn-lg btn-primary" >Delete</button>
     </div>
@@ -40,8 +40,8 @@
  <b-jumbotron class="text-center">
    <template v-slot:header>Gradient Swatch Generator</template>
    <template v-slot:lead>
-    Linear Gradient Swatch Generator, Select Two Color Values and Save to Swatch.<br />
-    Select Individual Swatch to Delete or Edit.
+    Linear Gradient Swatch Generator, Select Two Color Values and Publish.<br />
+    Select Individual Swatch to Edit or Delete.
    </template>
 <div class="container-fluid bg-3 text-center">
   <h3>Your Gradients</h3><br>
@@ -66,8 +66,6 @@ export default {
       value3: null
     }
  },
- props:
- ['value'],
  methods: {
     resetForm() {
     this.value3 = '';
@@ -97,14 +95,14 @@ export default {
       let value2 = this.value2;
       let name = this.value3;
       if(value1 == undefined || value2 == undefined || name == null) {
-      Vue.swal('Please Enter Name, Color Values');
+      Vue.swal('Please Enter Name & Color Values');
       } else {
       this.createSwatch();
       this.resetForm();
       this.handleSwatch();
       }
    },
-   // Copy gradient, Create new elements for swatch and add to swatch
+  // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
       // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
@@ -156,25 +154,37 @@ export default {
     });
  })
 },
-// Copy individual swatch to main div for re-editing
+// Copy the handled individual swatch to main div for re-editing
 editSwatch() {
+let saveBtn = document.getElementById('saveBtn');
+let editBtn = document.getElementById('editBtn');
 let mainDiv = document.getElementById('bodybg');
 let smallDiv = document.querySelector("#bg-gradient > .bg-gradient");
 document.querySelector('#bg-gradient > .bg-gradient').setAttribute("id", "gradient");
 mainDiv.style.backgroundImage = smallDiv.style.backgroundImage;
 let pubBtn = document.getElementById('pubBtn');
-pubBtn.style.display = "none";
-Vue.swal('Reset Values and Save The Edit');
+pubBtn.style.display = 'none';
+Vue.swal('Reset Values and Save Edited Swatch');
 document.getElementById('saveBtn').addEventListener('click', () => {
 // Get/Set bg, name and gradient values
 let bg = document.getElementById('bodybg');
 smallDiv = document.querySelector('#bg-gradient > #gradient');
 let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
+let value1 = this.value1;
+let value2 = this.value2;
+let name = this.value3;
+if(value1 == undefined || value2 == undefined || name == null) {
+Vue.swal('Please Enter Name & Color Values');
+} else {
 let hexValues = `${this.value1}, ${this.value2}`;
-let name = (`${this.value3}`);
 textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
-Vue.swal('Swatch Edited!');
+this.resetForm();
+saveBtn.style.display = 'none';
+editBtn.style.display = 'none';
+pubBtn.style.display = 'block';
+Vue.swal('Swatch Edited, Edit or Make Another One!');
+}
 });
 },
  deleteSwatch() {
@@ -235,7 +245,7 @@ footer {
     }
     #info p {
       text-align:left!important;
-      padding-left:10px;
+      padding-left:0px;
       font-size: 0.8em;
       font-weight: 700;
     }
@@ -243,7 +253,7 @@ footer {
       font-family:'Cryptofont';
       text-align:left;
       text-transform: capitalize;
-      padding-left: 10px;
+      padding-left: 0px;
       font-size: 0.9em;
       font-weight: 700;
     }

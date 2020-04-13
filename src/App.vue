@@ -104,11 +104,13 @@ export default {
    },
   // Copy gradient, Create new elements for swatch and add to swatch
     createSwatch() {
-      //let editBtn = document.getElementById('editBtn');
-      //let saveBtn = document.getElementById('saveBtn');
+      let editBtn = document.getElementById('editBtn');
+      let saveBtn = document.getElementById('saveBtn');
       // Set the actual css style value/statement for the gradient
       let gradient = `linear-gradient(to right, ${this.value1}, ${this.value2})`;
       // Set just the hex values to display/user copy
+      //let value1 = this.value1;
+      //let value2 = this.value2;
       let hexValues = `${this.value1}, ${this.value2}`;
       // Set the name of swatch
       let name = (`${this.value3}`);
@@ -135,11 +137,15 @@ export default {
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
+        editBtn.style.display = "none";
+        saveBtn.style.display = "none";
+        Vue.swal('Swatch Published, Make Another!');
         } else {
         // First swatch in first row.
         swatch.appendChild(newSwatch);
         gradDiv.style.backgroundImage = gradient;
         textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
+        Vue.swal('Swatch Published, Make Another!');
        }
     },
     // Handle individual swatch's on click

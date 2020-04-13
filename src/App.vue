@@ -94,7 +94,7 @@ export default {
       let value1 = this.value1;
       let value2 = this.value2;
       let name = this.value3;
-      if(value1 == undefined || value2 == undefined || name == null) {
+      if(value1 == undefined || value2 == undefined || name == "" || name == null) {
       Vue.swal('Please Enter Name & Color Values');
       } else {
       this.createSwatch();
@@ -158,7 +158,7 @@ export default {
     let editBtn = document.getElementById('editBtn');
     saveBtn.style.display = 'block';
     editBtn.style.display = 'block';
-    Vue.swal('Press Edit, Delete or Make Another Swatch');
+    Vue.swal('Press Edit, Delete or Make Another Swatch!');
     });
  })
 },
@@ -177,19 +177,25 @@ pubBtn.style.display = "none";
 delBtn.style.display = "none";
 Vue.swal('Reset Values and Save The Edit');
 document.getElementById('saveBtn').addEventListener('click', () => {
+let value1 = this.value1;
+let value2 = this.value2;
+let name = this.value3;
+if(value1 == undefined || value2 == undefined || name == "" || name == null || smallDiv.style.backgroundImage == mainDiv.style.backgroundImage) {
+Vue.swal('Please Enter Name & Color Values');
+} else {
 // Get/Set bg, name and gradient values
 let bg = document.getElementById('bodybg');
 smallDiv = document.querySelector('#bg-gradient > #gradient');
 let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
-let hexValues = `${this.value1}, ${this.value2}`;
-let name = (`${this.value3}`);
+let hexValues = `${value1}, ${value2}`;
 textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
 pubBtn.style.display = "block";
 delBtn.style.display = "block";
 editBtn.style.display = "none";
 saveBtn.style.display = "none";
-Vue.swal('Swatch Edited!');
+Vue.swal('Swatch Edited, Make Another!');
+}
 });
 },
  deleteSwatch() {

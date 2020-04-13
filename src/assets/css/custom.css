@@ -1,42 +1,16 @@
 /* BOOTSTRAP VARIABLES */
-/* work-sans-300 - latin */
-@font-face {
-  font-family: 'Work Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Work Sans Light'), local('WorkSans-Light'),
-       url('../fonts/work-sans-v5-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/work-sans-v5-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* work-sans-regular - latin */
-@font-face {
-  font-family: 'Work Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Work Sans'), local('WorkSans-Regular'),
-       url('../fonts/work-sans-v5-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/work-sans-v5-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* work-sans-700 - latin */
-@font-face {
-  font-family: 'Work Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Work Sans Bold'), local('WorkSans-Bold'),
-       url('../fonts/work-sans-v5-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/work-sans-v5-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
 /* CUSTOM STYLES */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold !important; }
-
 h1 {
   border-bottom: 1px solid #e5e8ec;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem; }
 
 p {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #4a5661; }
 
 .text-white p {
@@ -148,7 +122,7 @@ p {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Work Sans", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-family-sans-serif: "Roboto", "Roboto", "Helvetica Neue", Arial, sans-serif;
   --font-family-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 *,
@@ -157,21 +131,12 @@ p {
   box-sizing: border-box; }
 
 html {
-  font-family: Work Sans, sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent; }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Catamaran';
-  font-weight: 800 !important;
-}
 /*Buttons*/
 .btn-xl {
   text-transform: uppercase;
@@ -196,7 +161,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Work Sans", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
@@ -3979,7 +3944,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Work Sans", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 1.5;
@@ -4064,7 +4029,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Work Sans", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 1.5;
@@ -4108,7 +4073,7 @@ button.close {
   .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^="top"] .arrow::before {
     bottom: 0;
     border-top-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-top .arrow::after,
   .bs-popover-auto[x-placement^="top"] .arrow::after {
     bottom: 1px;
@@ -4128,7 +4093,7 @@ button.close {
   .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^="right"] .arrow::before {
     left: 0;
     border-right-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-right .arrow::after,
   .bs-popover-auto[x-placement^="right"] .arrow::after {
     left: 1px;
@@ -4145,7 +4110,7 @@ button.close {
   .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^="bottom"] .arrow::before {
     top: 0;
     border-bottom-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-bottom .arrow::after,
   .bs-popover-auto[x-placement^="bottom"] .arrow::after {
     top: 1px;
@@ -4174,7 +4139,7 @@ button.close {
   .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^="left"] .arrow::before {
     right: 0;
     border-left-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-left .arrow::after,
   .bs-popover-auto[x-placement^="left"] .arrow::after {
     right: 1px;
@@ -6496,7 +6461,7 @@ header.masthead .bg-circle-4 {
     font-size: 4rem;
   }
 }
-/*Footer styles*/  
+/*Footer styles*/
 section {
     padding: 60px 0;
 }

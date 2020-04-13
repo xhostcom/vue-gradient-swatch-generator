@@ -5,7 +5,6 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import App from "./App.vue";
 // Import global styles
 import 'bootstrap-vue/dist/bootstrap-vue.css';//Node Module
-import './assets/css/cryptofont.css';
 import './assets/css/custom.css';  //Local css
 import './registerServiceWorker'
 

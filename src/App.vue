@@ -9,9 +9,9 @@
 </nav>
 <div id="bodybg">
 <div class="container text-center">
-    <h2>Linear Gradient Generator</h2>
+    <h2 class="page-title">Linear Gradient Generator</h2>
     <br />
-    <h3>Pick the Color Range and Publish Swatch</h3>
+    <h3 class="page-subtitle">Pick the Color Range and Publish Swatch</h3>
     <br />
  <div class="mx-auto" style="width: 80px;">
      <b-form-input type="color" size="lg" v-model="value1" ref="value1" @input="setbgColor()" id="colorone" ></b-form-input>
@@ -63,7 +63,33 @@ export default {
     return {
       value1: null,
       value2: null,
-      value3: null
+      value3: null,
+      items : [
+      {
+        id : 1,
+        value1 : '#f99876',
+        value2 : '#fff',
+        name: 'Pacific Silk'
+      },
+      {
+        id : 2,
+        value1 : 'red',
+        value2 : '#fff',
+        name: 'Artistic Demolition'
+      },
+       {
+        id : 3,
+        value1 : 'red',
+        value2 : '#fff',
+        name: 'Masochistic Sunrise'
+       },
+       {
+        id : 4,
+        value1 : 'red',
+        value2 : '#fff',
+        name: 'Futuristic Bedlam'
+       }
+    ]
     }
  },
  methods: {
@@ -175,7 +201,7 @@ let pubBtn = document.getElementById('pubBtn');
 let delBtn = document.getElementById('delBtn');
 pubBtn.style.display = "none";
 delBtn.style.display = "none";
-Vue.swal('Reset Values and Save The Edit');
+Vue.swal('Reset Values and Save Edited Swatch');
 document.getElementById('saveBtn').addEventListener('click', () => {
 let value1 = this.value1;
 let value2 = this.value2;
@@ -190,6 +216,7 @@ let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
 let hexValues = `${value1}, ${value2}`;
 textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
+this.resetForm();
 pubBtn.style.display = "block";
 delBtn.style.display = "block";
 editBtn.style.display = "none";
@@ -207,10 +234,17 @@ Vue.swal('Swatch Edited, Make Another!');
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Merienda&display=swap');
+@font-face {
+  font-family: 'Merienda';
+  src: url('https://fonts.googleapis.com/css?family=Merienda&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 #bodybg {
-      height: 450px;
-      min-height:450px;
+      height: 460px;
+      min-height:460px;
    }
 }
 * {
@@ -235,14 +269,23 @@ footer {
       border-radius: 8px 8px 8px 8px;
     }
     h4 {
-    font-family:'Cryptofont';
+    font-family:'Roboto';
     margin-top: 15px;
     text-transform: uppercase;
     color: #345678;
     }
+    h3.page-subtitle {
+    font-family:'Roboto';
+    font-size: 24px;
+    }
+    h2.page-title {
+      font-family: 'Merienda', cursive;
+      font-size: 44px;
+    }
     h1.display-3 {
-      font-family:'Cryptofont';
-      font-size:56px;
+      margin-top:20px;
+      font-family: 'Merienda', cursive;
+      font-size:52px;
     }
     .bg-gradient {
     height: 180px;;
@@ -255,13 +298,14 @@ footer {
     width:100%;
     }
     #info p {
-      text-align:left!important;
+      font-family:'Roboto';
+      text-align:left;
       padding-left:0px;
       font-size: 0.8em;
       font-weight: 700;
     }
     #info h5 {
-      font-family:'Cryptofont';
+      font-family:'Roboto';
       text-align:left;
       text-transform: capitalize;
       padding-left: 0px;
@@ -276,10 +320,10 @@ footer {
 #bodybg {
 padding-top: 40px;
 height: 460px;
-background-image: linear-gradient( to right,#1b78df,#0cd19e);
+background-image: linear-gradient( to right,#0fb1d1,#0fb1d1);
 }
 .search-bar-2 {
-  display:none!important;
+  display:none;
 }
 input#colorone,
 input#colortwo {

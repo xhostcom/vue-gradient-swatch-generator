@@ -2,7 +2,7 @@ Vue PWA Gradient Swatch Generator
 
 ## Introduction
 
-Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass
+Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass, Javascript methods.
 
 ## Demo
 

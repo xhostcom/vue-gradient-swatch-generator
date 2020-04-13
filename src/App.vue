@@ -97,7 +97,7 @@ export default {
       let value2 = this.value2;
       let name = this.value3;
       if(value1 == undefined || value2 == undefined || name == null) {
-      Vue.swal('Please Enter Name and Color Values');
+      Vue.swal('Please Enter Name, Color Values');
       } else {
       this.createSwatch();
       this.resetForm();
@@ -173,8 +173,6 @@ let textDiv = document.querySelector('#bg-gradient > #info');
 smallDiv.style.backgroundImage = bg.style.backgroundImage;
 let hexValues = `${this.value1}, ${this.value2}`;
 let name = (`${this.value3}`);
-console.log(name);
-console.log(hexValues);
 textDiv.innerHTML = `<h5>${name}</h5><p>${hexValues}</p>`;
 Vue.swal('Swatch Edited!');
 });

@@ -6,9 +6,9 @@ Linear Gradient Swatch Generator with Bootstrap, Bootstrap Vue, Sass, Javascript
 
 ## Demo
 
-https://gallant-shaw-da1d58.netlify.com/
+https://hopeful-cray-da35c4.netlify.com/
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/761188fe-0cc9-4ab9-8803-691d4b9555c7/deploy-status)](https://app.netlify.com/sites/gallant-shaw-da1d58/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9d7dea54-398e-43f2-88d0-9cc617e969a5/deploy-status)](https://app.netlify.com/sites/hopeful-cray-da35c4/deploys)
 
 ## Repo
 

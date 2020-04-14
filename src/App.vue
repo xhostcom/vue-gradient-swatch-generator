@@ -300,7 +300,7 @@ footer {
     #info p {
       font-family:'Roboto';
       text-align:left;
-      padding-left:0px;
+      padding-left:2px;
       font-size: 0.8em;
       font-weight: 700;
     }
@@ -308,7 +308,7 @@ footer {
       font-family:'Roboto';
       text-align:left;
       text-transform: capitalize;
-      padding-left: 0px;
+      padding-left: 2px;
       font-size: 0.9em;
       font-weight: 700;
     }

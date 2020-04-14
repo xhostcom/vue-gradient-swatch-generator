@@ -234,10 +234,10 @@ Vue.swal('Swatch Edited, Make Another!');
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Merienda&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Shrikhand&display=swap');
 @font-face {
-  font-family: 'Merienda';
-  src: url('https://fonts.googleapis.com/css?family=Merienda&display=swap');
+  font-family: '';
+  src: url('https://fonts.googleapis.com/css?family=Shrikhand&display=swap');
   font-weight: normal;
   font-style: normal;
 }
@@ -279,12 +279,12 @@ footer {
     font-size: 24px;
     }
     h2.page-title {
-      font-family: 'Merienda', cursive;
+      font-family: 'Shrikhand', cursive;
       font-size: 44px;
     }
     h1.display-3 {
       margin-top:20px;
-      font-family: 'Merienda', cursive;
+      font-family: 'Shrikhand', cursive;
       font-size:52px;
     }
     .bg-gradient {
